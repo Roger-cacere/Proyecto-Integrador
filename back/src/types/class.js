@@ -1,4 +1,4 @@
-class Movie {
+/* class Movie {
     constructor(title, year, director, duration, genre, rate, poster) {
       if (!title || !year || !director) {
         throw new Error("Se requiere completar los campos");
@@ -14,4 +14,4 @@ class Movie {
     }
   }
   
-  module.exports = {Movie};
+  module.exports = {Movie}; */

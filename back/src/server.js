@@ -1,17 +1,10 @@
-const express = require("express");
-const morgan = require ("morgan");
-const cors = require ("cors");
-const router = require ("./routes/index");
-const moviesRoute = require ("./routes/moviesRoute")
-
-const app = express();
-
-app.use(morgan("dev"));
-app.use(cors());
-app.use(express.json());
+const express = require("express"); //Requerimos express
+const router = require("./routes/"); //Ya tenemos requerido el enrutador
 
 
-app.use(router);
+const app = express(); 
+
+app.use(router); //Este moldulo se encarga de pdir app, no maneja rutas.  De eso se encarga rutas,por eso es q direcciona hacia el router la solicitud
 
 module.exports = app;
 
