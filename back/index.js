@@ -8,7 +8,7 @@ app.listen(3000, () => {
 /* const mongoose = require('mongoose');
 
 require("dotenv").config();
-const { PORT } = process.env;
+const { PORT } = process.env; 
 const app = require("./src/server");
 const dbCon = require("./src/config/dbCon");
 
