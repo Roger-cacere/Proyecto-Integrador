@@ -1,21 +1,15 @@
-const app = require("./src/server");
+/* const express = require("express"); */
+const app = require("./src/server.js");
+const dbCon = require("./src/config/dbConnection.js")
 
-app.listen(3000, () => {
-  console.log("Servidor escuchando en el puerto 3000");
+dbCon()
+.then(() =>{
+    app.listen(3000, () => {
+        console.log("Servidor escucha el puerto 3000");
+    })
+})
+.catch((error) => {
+    console.log(error);
 });
 
 
-/* const mongoose = require('mongoose');
-
-require("dotenv").config();
-const { PORT } = process.env; 
-const app = require("./src/server");
-const dbCon = require("./src/config/dbCon");
-
-dbCon()
-  .then(() => app.listen(PORT, "localhost", () =>
-    console.log(`Servidor escuchando en el puerto ${PORT}`)
-  ))
-  .catch((err) => {
-    console.log("Error al conectar la BDD", err.message);
-  }); */

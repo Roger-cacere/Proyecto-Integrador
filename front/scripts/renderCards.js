@@ -1,5 +1,36 @@
 
-const contenedorTarjetas = document.querySelector(".container-cards");
+const renderCards=(data)=>{
+    data.map((item)=>{
+     const{ title,year,director,duration,genre,rate,poster} =item ;
+ 
+     const card =document.createElement("div");
+     card.classList.add("card");
+ 
+     const eTitle= document.createElement("h1");
+     const eYear = document.createElement("h3");
+     const eDirector = document.createElement ("h3");
+     const eduration = document.createElement ("h3");
+     const egenre =document.createElement ("h3");
+     const erate=document.createElement ("h3");
+     const eimg=document.createElement ("img");
+ 
+     eTitle.innerHTML= title;
+     eYear.innerHTML=year;
+     eDirector.innerHTML=director;
+     eduration.innerHTML=duration;
+     egenre.innerHTML=genre;
+     erate.innerHTML=rate;
+     eimg.src=poster;
+ 
+     card.append (eTitle,eYear,eDirector,eduration,egenre,erate,eimg);
+ 
+     container.appendChild(card);
+   })
+ }
+ module.exports = renderCards;
+
+
+/* const contenedorTarjetas = document.querySelector(".container-cards");
 
 function renderCards(data){
     data.forEach((movie) => {
@@ -55,3 +86,4 @@ function renderCards(data){
 }
 
 module.exports = renderCards;
+ */
