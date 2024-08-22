@@ -70,9 +70,6 @@ const handlerSubmit = (event) => {
         poster: poster.value,
         genre: genres
     }
-    // axios.post("/movies/createMovie", movie).then((response)=> console.log("envio form correcto a back" + response))
-    // .catch((error)=> console.log("No se puede enviar form a back", error))//
-    // console.log(movie);//
     const sendDataToBackend = async (movie) => {
         try {
             const response = await axios.post('http://localhost:3000/movies', movie);

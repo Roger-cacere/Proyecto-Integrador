@@ -15,7 +15,7 @@
   \****************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const renderFilms = __webpack_require__(/*! ./renderFilms */ \"./scripts/renderFilms.js\")\r\nconst axios = __webpack_require__(/*! axios */ \"./node_modules/axios/dist/browser/axios.cjs\");\r\n\r\n//con Promesas\r\n// const getFilms = () => {\r\n//     axios.get(\"https://students-api.up.railway.app/movies\")\r\n//     .then((response)=>{\r\n//         // console.log(response);\r\n//         response.data.map(renderFilms);\r\n//     }).catch((error) => {\r\n//         // console.log(error);\r\n//         alert(error.message);\r\n//     })\r\n// }\r\n\r\n//Async Await\r\nconst getFilms = async() => {\r\n    try {\r\n        const result = await axios.get(\"http://localhost:3000/movies\")\r\n        result.data.map(renderFilms);  \r\n    } catch (error) {\r\n        console.log(error.message);\r\n    }\r\n}\r\n\r\n\r\n\r\n// const getFilms = () => {\r\n//     $.get(\"https://students-api.up.railway.app/movies\", (data)=> data.map(renderFilms).fail(()=>alert(\"Error al traer las peliculas\")))\r\n// }\r\n\r\nmodule.exports = getFilms;\n\n//# sourceURL=webpack://front/./scripts/handler.js?");
+eval("const renderFilms = __webpack_require__(/*! ./renderFilms */ \"./scripts/renderFilms.js\")\r\nconst axios = __webpack_require__(/*! axios */ \"./node_modules/axios/dist/browser/axios.cjs\");\r\nconst getFilms = async() => {\r\n    try {\r\n        const result = await axios.get(\"http://localhost:3000/movies\")\r\n        result.data.map(renderFilms);  \r\n    } catch (error) {\r\n        console.log(error.message);\r\n    }\r\n}\r\n\r\nmodule.exports = getFilms;\n\n//# sourceURL=webpack://front/./scripts/handler.js?");
 
 /***/ }),
 
