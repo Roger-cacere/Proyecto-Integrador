@@ -1,92 +1,105 @@
-const titleInput = document.getElementById("title");
-const yearInput = document.getElementById("year");
-const directorInput = document.getElementById("director");
-const durationInput = document.getElementById("duration");
-const genreInput = document.getElementById("genre");
-const rateInput = document.getElementById("rate");
-const posterInput = document.getElementById("poster");
+const axios = require("axios")
+const genres = [
+    "Actions",
+    "Comedy",
+    "Fi-Ci",
+    "Animation",
+    "Cartoon",
+    "Drama",
+    "Horror",
+    "Adventure"
+];
 
-function clearForm () {
-  document.getElementById('title').value = '';
-  document.getElementById('year').value = '';
-  document.getElementById('director').value = '';
-  document.getElementById('duration').value = '';
-  document.getElementById('genre').value = '';
-  document.getElementById('rate').value = '';
-  document.getElementById('poster').value = '';
+const btnSubmint = document.getElementById("btnSubmit")
+const btnCleaner = document.getElementById("btnCleaner")
+const options = document.getElementById("options")
+const title = document.getElementById("title")
+const year = document.getElementById("year")
+const director = document.getElementById("director")
+const duration = document.getElementById("duration")
+const rate = document.getElementById("rate")
+const poster = document.getElementById("poster")
+
+const renderGenres = () => {
+    options.innerHTML = "";
+    
+    for(const genre of genres) {
+        const input = document.createElement("input")
+        const label = document.createElement("label")
+
+        input.type = "checkbox"
+        input.style.margin="5px"
+        input.id = genre
+        input.name = "genre[]"
+        input.value = genre
+        
+        label.htmlFor = genre;
+        label.textContent = genre;
+
+        options.appendChild(input)
+        options.appendChild(label)
+    }
+    return options
+}
+renderGenres();
+
+const validateCheckbox = () => {
+    const checkboxes = document.querySelectorAll('input[name="genre[]"]')
+    const genres = []
+
+    for(const item of checkboxes) {
+        if (item.checked){
+            item.classList.add("selected")
+            genres.push(item.id)
+        }
+    }
+    return genres
 }
 
-function validacionMovie(movie){
-  const errors = [];
-  
-  if(!movie.title){
-    errors.push('El título es requerido');
-  
-  }
+const handlerSubmit = (event) => {
+    event.preventDefault()
+    const genres = validateCheckbox()
 
-  if(!movie.year){
-    errors.push('El año es requerido');
-  }else if ( movie.year.length<4){
-
-    errors.push('El año debe ser de 4 cifras')
-  }
-
-  if(!movie.director){
-    errors.push('El director es requerido');
-  }
-
-  if(!movie.duration){
-    errors.push('La duracion es requerido');
-  }
-
-  if(!movie.genre){
-    errors.push('El genero es requerido');
-  }
-
-  if(!movie.rate){
-    errors.push('El puntaje es requerido');
-  }
-  
-  const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
-  if (!movie.poster || !urlRegex.test(movie.poster)) {
-    errors.push('La url debe ser valida'); 
-  }
-  return errors;
+    if (![title.value, year.value, director.value, duration.value, rate.value, poster.value, genres].every(Boolean)) return alert("Falta llenar campos en el Formulario");
+    const movie = {
+        title: title.value,
+        year: year.value,
+        director: director.value,
+        duration: duration.value,
+        rate: rate.value,
+        poster: poster.value,
+        genre: genres
+    }
+    // axios.post("/movies/createMovie", movie).then((response)=> console.log("envio form correcto a back" + response))
+    // .catch((error)=> console.log("No se puede enviar form a back", error))//
+    // console.log(movie);//
+    const sendDataToBackend = async (movie) => {
+        try {
+            const response = await axios.post('http://localhost:3000/movies', movie);
+        } catch (error) {
+            console.error('Error al enviar datos al backend:', error);
+        }
+    };
+    sendDataToBackend(movie)
+    alert("pelicula enviada")
 }
 
-const botonAgregarPelicula=document.getElementById("submitButton");
 
-botonAgregarPelicula.addEventListener("click",()=>{
-  const newMovie = { 
-    title: titleInput.value.trim(),
-    year: yearInput.value.trim(),
-    director: directorInput.value.trim(),
-    duration:durationInput.value.trim(),
-    genre: genreInput.value.trim(),
-    rate: rateInput.value.trim(),
-    poster: posterInput.value.trim()
-  };
 
-  const errors = validacionMovie(newMovie);
+const cleanInputs = () => {
+    title.value=""
+    year.value=""
+    director.value=""
+    duration.value=""
+    rate.value=""
+    poster.value=""
 
-  if(errors.length > 0){
-    let errorMessage = "";
-    for (let i = 0; i < errors.length; i++) {
-      errorMessage += errors[i] + "\n";
+    const checkboxes = document.querySelectorAll('input[name="genre[]"]')
+    for (const item of checkboxes){
+        item.checked = false;
+        item.classList.remove("selected")
     }
-    alert(errorMessage);
-  };
-  sendData(newMovie);
-});
+}
 
-  async function sendData(dataForm) {
-    try {
-      const response = await axios.post("http://localhost:3000/movies", dataForm);
-      alert("Película agregada correctamente");
-    } catch (error) {
-      alert("La película no pudo ser agregada");
-    }
-  }
-  
-const botonBorrarPelicula=document.getElementById("clearButton");
-botonBorrarPelicula.addEventListener("click",clearForm);
+btnSubmint.addEventListener("click",handlerSubmit)
+btnCleaner.addEventListener("click",cleanInputs)

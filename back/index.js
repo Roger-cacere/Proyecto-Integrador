@@ -1,15 +1,16 @@
-/* const express = require("express"); */
-const app = require("./src/server.js");
-const dbCon = require("./src/config/dbConnection.js")
+const app = require("./src/app")
+const conDB = require("./src/config/conecctionDB")
+require("dotenv").config();
 
-dbCon()
-.then(() =>{
-    app.listen(3000, () => {
-        console.log("Servidor escucha el puerto 3000");
-    })
+const{ PORT } = process.env;
+
+conDB()
+.then((res)=>{
+    app.listen(PORT, ()=> {
+        console.log(`server is listening on port ${PORT}`)
+    });
 })
-.catch((error) => {
-    console.log(error);
+.catch((err)=> {
+    console.error("Error al conectar la base de datos " + err.message)
 });
-
 
