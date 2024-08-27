@@ -1,0 +1,166 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Margins and padding */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+/* Typography */
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Lists */
+ol,
+ul {
+    list-style: none;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Form elements */
+button,
+input,
+optgroup,
+select,
+textarea {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+}
+
+/* Additional Reset */
+button {
+    overflow: visible;
+}
+
+/* Define the border-width to be medium */
+button,
+select {
+    text-transform: none;
+}
+
+/* Reset buttons */
+button,
+input,
+select {
+    /* Should be reset to 'normal' */
+    line-height: normal;
+}
+
+/* Corrects font smoothing for webkit */
+button,
+input,
+textarea {
+    
+    /* Reset inner border and padding */
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    /* Removes inner shadows */
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    /* Define vertical alignment to be baseline */
+    vertical-align: baseline;
+    /* Define cursor to be 'pointer' */
+    cursor: pointer;
+}
+
+/* Reset images */
+img {
+    vertical-align: middle;
+    border: none;
+}

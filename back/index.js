@@ -1,21 +1,16 @@
-const app = require("./src/server");
+const app = require("./src/app")
+const conDB = require("./src/config/conecctionDB")
+require("dotenv").config();
 
-app.listen(3000, () => {
-  console.log("Servidor escuchando en el puerto 3000");
+const{ PORT } = process.env;
+
+conDB()
+.then((res)=>{
+    app.listen(PORT, ()=> {
+        console.log(`server is listening on port ${PORT}`)
+    });
+})
+.catch((err)=> {
+    console.error("Error al conectar la base de datos " + err.message)
 });
 
-
-/* const mongoose = require('mongoose');
-
-require("dotenv").config();
-const { PORT } = process.env; 
-const app = require("./src/server");
-const dbCon = require("./src/config/dbCon");
-
-dbCon()
-  .then(() => app.listen(PORT, "localhost", () =>
-    console.log(`Servidor escuchando en el puerto ${PORT}`)
-  ))
-  .catch((err) => {
-    console.log("Error al conectar la BDD", err.message);
-  }); */
